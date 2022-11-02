@@ -30,7 +30,7 @@ export const ItemCount = ({ stock, onAdd }) => {
             onAdd();
           }
         }}>
-        Agregar al carrito
+        Agregar al carrit o
       </Button>
     </>
   );
