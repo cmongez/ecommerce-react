@@ -1,7 +1,8 @@
-export const Item = (props) => {
+export const Item = ({ title, description, price, pictureUrl }) => {
   return (
     <div>
-      <img src={props.pictureUrl} alt='' />
+      <img src={pictureUrl} alt='' />
+      <div>{title}</div>
     </div>
   );
 };
