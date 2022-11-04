@@ -1,6 +1,6 @@
 import { AppBar, IconButton, Toolbar } from '@mui/material';
 import { CartWidget } from './CartWidget';
-import './NavBar.css';
+import './Navbar.css';
 
 const categories = ['Mujeres', 'Hombres', 'Niños'];
 const categoryList = categories.map((category) => {
@@ -11,7 +11,7 @@ const categoryList = categories.map((category) => {
   );
 });
 
-export const NavBar = () => {
+export const Navbar = () => {
   return (
     <AppBar position='static'>
       <Toolbar className='nav'>

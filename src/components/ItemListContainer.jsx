@@ -1,4 +1,3 @@
-import { Button } from '@mui/material';
 import { ItemCount } from './ItemCount';
 import { ItemList } from './ItemList';
 export const ItemListContainer = ({ greeting }) => {
