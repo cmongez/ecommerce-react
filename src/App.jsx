@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Home } from './pages/Home';
 import { Category } from './pages/Category';
+import { ItemDetailContainer } from './components/ItemDetailContainer';
 
 function App() {
   return (
@@ -8,7 +9,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/category/:categoryId' element={<Category />} />
+          <Route path='/category/:category' element={<Category />} />
+          <Route path='/product/:productId' element={<ItemDetailContainer />} />
         </Routes>
       </BrowserRouter>
     </div>

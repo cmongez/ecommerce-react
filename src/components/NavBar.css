@@ -5,11 +5,16 @@
     
 }
 .nav__list{
-list-style: none;
 display: flex;
+padding:0;
 gap:1em;
 justify-content: space-between;
 }
-.nav__list__item{
+.nav__list__item, .logo{
     cursor: pointer;
+    color: white;
+    text-decoration: none;
+}
+.nav__list__item:hover{
+background-color: blue;
 }

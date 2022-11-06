@@ -1,30 +1,37 @@
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { getProducts } from '../api/products';
-import { Item } from './Item';
+import { useEffect, useState } from 'react';
+import { getProduct } from '../api/products';
+import { ItemDetail } from './ItemDetail';
+import { ItemCount } from './ItemCount';
+import { useParams } from 'react-router-dom';
+import { Layout } from './Layout';
 
-export const ItemDetailcontainer = () => {
-  const [products, setProducts] = useState([]);
+export const ItemDetailContainer = ({ id }) => {
+  const [product, setProduct] = useState([]);
+  const { productId } = useParams();
+  console.log(productId);
 
   useEffect(() => {
-    getProducts()
-      .then((items) => setProducts(items))
+    getProduct(productId)
+      .then((item) => {
+        console.log(item);
+        setProduct(item);
+      })
       .catch((e) => console.log(e));
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [productId]);
 
   return (
-    <div className='products'>
-      {products.map((product) => {
-        return (
-          <Item
-            key={product.id}
-            title={product.title}
-            description={product.description}
-            price={product.price}
-            pictureUrl={product.pictureUrl}
-          />
-        );
-      })}
+    <div>
+      <Layout>
+        <ItemDetail
+          id={product.id}
+          key={product.id}
+          title={product?.title}
+          description={product.description}
+          price={product.price}
+          pictureUrl={product.pictureUrl}
+        />
+      </Layout>
     </div>
   );
 };

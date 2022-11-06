@@ -1,29 +1,36 @@
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { getProducts } from '../api/products';
 import { Item } from './Item';
+import { Grid } from '@mui/material';
+import { useParams } from 'react-router-dom';
 export const ItemList = () => {
+  const { category } = useParams();
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    getProducts()
-      .then((items) => setProducts(items))
+    getProducts(category)
+      .then((items) => {
+        console.log(items);
+        setProducts(items);
+      })
       .catch((e) => console.log(e));
-  }, []);
+  }, [category]);
 
   return (
-    <div className='products'>
+    <Grid container spacing={2}>
       {products.map((product) => {
         return (
-          <Item
-            key={product.id}
-            title={product.title}
-            description={product.description}
-            price={product.price}
-            pictureUrl={product.pictureUrl}
-          />
+          <Grid key={product.id} item xs={12} sm={6} md={4} lg={3}>
+            <Item
+              id={product.id}
+              title={product.title}
+              description={product.description}
+              price={product.price}
+              pictureUrl={product.pictureUrl}
+            />
+          </Grid>
         );
       })}
-    </div>
+    </Grid>
   );
 };
