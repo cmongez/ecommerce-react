@@ -1,13 +1,17 @@
 import { AppBar, IconButton, Toolbar } from '@mui/material';
 import { CartWidget } from './CartWidget';
+import { Link } from 'react-router-dom';
 import './Navbar.css';
 
-const categories = ['Mujeres', 'Hombres', 'Niños'];
-const categoryList = categories.map((category) => {
+const categories = ['Mujer', 'Hombre', 'Tecnologia'];
+const categoryList = categories.map((elem) => {
   return (
-    <li key={category} className='nav__list__item'>
-      {category}
-    </li>
+    <Link
+      className='nav__list__item'
+      key={elem}
+      to={`/category/${elem.toLowerCase()}`}>
+      {elem}
+    </Link>
   );
 });
 
@@ -15,10 +19,12 @@ export const Navbar = () => {
   return (
     <AppBar position='static'>
       <Toolbar className='nav'>
-        <IconButton size='large' color='inherit'>
-          Mongez
-        </IconButton>
-        <ul className='nav__list'>{categoryList}</ul>
+        <Link className='logo' to='/'>
+          <IconButton size='large' color='inherit'>
+            Mongez
+          </IconButton>
+        </Link>
+        <div className='nav__list'>{categoryList}</div>
         <CartWidget />
       </Toolbar>
     </AppBar>

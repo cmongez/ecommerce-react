@@ -23,15 +23,17 @@ export const ItemCount = ({ stock, onAdd }) => {
         {count}
         <Button onClick={() => handleIncrease()}>+</Button>
       </div>
-      <Button
-        variant='outlined'
-        onClick={() => {
-          if (count) {
-            onAdd();
-          }
-        }}>
-        Agregar al carrit o
-      </Button>
+      <div>
+        <Button
+          variant='outlined'
+          onClick={() => {
+            if (count) {
+              onAdd();
+            }
+          }}>
+          Agregar
+        </Button>
+      </div>
     </>
   );
 };
