@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getProduct } from '../api/products';
 import { ItemDetail } from './ItemDetail';
-import { ItemCount } from './ItemCount';
 import { useParams } from 'react-router-dom';
 import { Layout } from './Layout';
 
