@@ -3,6 +3,7 @@ import { getProducts } from '../api/products';
 import { Item } from './Item';
 import { Grid } from '@mui/material';
 import { useParams } from 'react-router-dom';
+import './ItemList.css';
 export const ItemList = () => {
   const { category } = useParams();
   const [products, setProducts] = useState([]);
@@ -10,7 +11,6 @@ export const ItemList = () => {
   useEffect(() => {
     getProducts(category)
       .then((items) => {
-        console.log(items);
         setProducts(items);
       })
       .catch((e) => console.log(e));
@@ -20,14 +20,15 @@ export const ItemList = () => {
     <Grid container spacing={2}>
       {products.map((product) => {
         return (
-          <Grid key={product.id} item xs={12} sm={6} md={4} lg={3}>
-            <Item
-              id={product.id}
-              title={product.title}
-              description={product.description}
-              price={product.price}
-              pictureUrl={product.pictureUrl}
-            />
+          <Grid
+            className='card'
+            key={product.id}
+            item
+            xs={12}
+            sm={6}
+            md={4}
+            lg={3}>
+            <Item product={product} />
           </Grid>
         );
       })}

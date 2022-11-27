@@ -2,17 +2,25 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Home } from './pages/Home';
 import { Category } from './pages/Category';
 import { ItemDetailContainer } from './components/ItemDetailContainer';
+import { CartProvider } from './context/CartContext';
+import { Cart } from './components/Cart';
 
 function App() {
   return (
     <div className='App'>
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/category/:category' element={<Category />} />
-          <Route path='/product/:productId' element={<ItemDetailContainer />} />
-        </Routes>
-      </BrowserRouter>
+      <CartProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/cart' element={<Cart />} />
+            <Route path='/category/:category' element={<Category />} />
+            <Route
+              path='/product/:productId'
+              element={<ItemDetailContainer />}
+            />
+          </Routes>
+        </BrowserRouter>
+      </CartProvider>
     </div>
   );
 }

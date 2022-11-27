@@ -2,6 +2,7 @@ import { AppBar, IconButton, Toolbar } from '@mui/material';
 import { CartWidget } from './CartWidget';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
+import { useCartContext } from '../context/CartContext';
 
 const categories = ['Mujer', 'Hombre', 'Tecnologia'];
 const categoryList = categories.map((elem) => {
@@ -16,6 +17,8 @@ const categoryList = categories.map((elem) => {
 });
 
 export const Navbar = () => {
+  const { cart, getCartQuantity } = useCartContext();
+  console.log({ cart });
   return (
     <AppBar position='static'>
       <Toolbar className='nav'>
@@ -25,7 +28,12 @@ export const Navbar = () => {
           </IconButton>
         </Link>
         <div className='nav__list'>{categoryList}</div>
-        <CartWidget />
+        <Link to='/cart'>
+          <div>
+            <span>{getCartQuantity()}</span>
+            <CartWidget />
+          </div>
+        </Link>
       </Toolbar>
     </AppBar>
   );
