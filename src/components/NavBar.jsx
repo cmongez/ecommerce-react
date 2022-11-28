@@ -18,7 +18,7 @@ const categoryList = categories.map((elem) => {
 
 export const Navbar = () => {
   const { cart, getCartQuantity } = useCartContext();
-  console.log({ cart });
+
   return (
     <AppBar position='static'>
       <Toolbar className='nav'>

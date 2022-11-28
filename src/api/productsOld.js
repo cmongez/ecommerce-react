@@ -271,50 +271,20 @@
 //   },
 // ];
 import { db } from './config';
-import {
-  collection,
-  getDocs,
-  where,
-  getDoc,
-  doc,
-  query,
-  addDoc,
-  updateDoc,
-} from 'firebase/firestore';
+import { collection, getDocs } from 'firebase/firestore';
 
 const productsRef = collection(db, 'items');
-
-export const getProducts = async (category) => {
-  const products = [];
-
-  const q = category
-    ? query(productsRef, where('category', '==', category))
-    : productsRef;
-  const querySnapshot = await getDocs(q);
-
-  querySnapshot.forEach((doc) => {
-    products.push({ ...doc.data(), id: doc.id });
+export const getProducts = (category) =>
+  new Promise((res, rej) => {
+    const response = category
+      ? products.filter((p) => p.category === category)
+      : products;
+    setTimeout(() => {
+      res(response);
+    }, 1500);
   });
-  return products;
-};
 
-export const getProduct = async (id) => {
-  const document = doc(db, 'items', id);
-
-  const docSnap = await getDoc(document);
-  if (docSnap.exists()) {
-    return { id: docSnap.id, ...docSnap.data() };
-  }
-  return null;
-};
-
-export const updateProduct = async (id, item) => {
-  const productDoc = await updateDoc(doc(db, 'items', id), item);
-  return;
-};
-
-// export const cargarData = () => {
-//   products.forEach(async (prod) => {
-//     await addDoc(productsRef, prod);
-//   });
-// };
+export const getProduct = (id) =>
+  new Promise((res, rej) => {
+    setTimeout(() => res(products.find((item) => item.id == id)), 1500);
+  });

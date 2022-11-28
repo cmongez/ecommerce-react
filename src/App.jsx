@@ -4,6 +4,7 @@ import { Category } from './pages/Category';
 import { ItemDetailContainer } from './components/ItemDetailContainer';
 import { CartProvider } from './context/CartContext';
 import { Cart } from './components/Cart';
+import { Checkout } from './components/Checkout';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<Home />} />
+            <Route path='/checkout' element={<Checkout />} />
             <Route path='/cart' element={<Cart />} />
             <Route path='/category/:category' element={<Category />} />
             <Route

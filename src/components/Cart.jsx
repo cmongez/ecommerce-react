@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Button } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -9,10 +10,29 @@ import Paper from '@mui/material/Paper';
 import { useCartContext } from '../context/CartContext';
 import { Layout } from '../components/Layout';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { addOrder } from '../api/orders';
 
 export const Cart = () => {
-  const { getTotal, cart, removeProduct } = useCartContext();
-  console.log(cart);
+  const { getTotal, cart, removeProduct, clear } = useCartContext();
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+
+  const createOrder = () => {
+    const items = cart.map(({ id, title, quantity, price }) => ({
+      id,
+      title,
+      quantity,
+      price,
+    }));
+    const order = {
+      buyer: { name: 'Cesar', phone: '+5691234567', email: 'user2@gmail.com' },
+      items: items,
+      total: getTotal(),
+    };
+    addOrder(order).then(clear());
+  };
 
   if (cart.length > 0) {
     return (
@@ -53,7 +73,33 @@ export const Cart = () => {
             </TableBody>
           </Table>
         </TableContainer>
-        <div>Total a pagar: {getTotal()}</div>
+
+        <div style={{ display: 'grid', gap: 10 }}>
+          <span>Nombre</span>
+          <input
+            style={{ border: '1px solid black', height: 40 }}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <span>Telefono</span>
+          <input
+            style={{ border: '1px solid black', height: 40 }}
+            onChange={(e) => setPhone(e.target.value)}
+          />
+          <span>Email</span>
+          <input
+            style={{ border: '1px solid black', marginBottom: 15, height: 40 }}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div>
+          <span>Total a pagar: {getTotal()}</span>
+          <Button variant='contained' onClick={() => createOrder()}>
+            Pagar
+          </Button>
+          <Button variant='contained' onClick={() => clear()}>
+            Vaciar
+          </Button>
+        </div>
       </Layout>
     );
   }
