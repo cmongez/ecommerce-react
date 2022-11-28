@@ -87,6 +87,7 @@ export const Cart = () => {
           />
           <span>Email</span>
           <input
+            required
             style={{ border: '1px solid black', marginBottom: 15, height: 40 }}
             onChange={(e) => setEmail(e.target.value)}
           />
