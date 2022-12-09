@@ -12,14 +12,23 @@ import { Layout } from '../components/Layout';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { addOrder } from '../api/orders';
+import { updateManyProducts } from '../api/products';
 
 export const Cart = () => {
   const { getTotal, cart, removeProduct, clear } = useCartContext();
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
+  const [emailConfirm, setEmailConfirm] = useState('');
+  const sameEmails = () => {
+    if (email === emailConfirm) {
+      return true;
+    }
 
-  const createOrder = () => {
+    return false;
+  };
+  const createOrder = async () => {
+    const date = new Date();
     const items = cart.map(({ id, title, quantity, price }) => ({
       id,
       title,
@@ -27,10 +36,12 @@ export const Cart = () => {
       price,
     }));
     const order = {
-      buyer: { name: 'Cesar', phone: '+5691234567', email: 'user2@gmail.com' },
+      buyer: { name, phone, email },
       items: items,
+      date: date.toLocaleDateString(),
       total: getTotal(),
     };
+    await updateManyProducts(items);
     addOrder(order).then(clear());
   };
 
@@ -74,27 +85,44 @@ export const Cart = () => {
           </Table>
         </TableContainer>
 
-        <div style={{ display: 'grid', gap: 10 }}>
+        <form style={{ display: 'grid', gap: 10 }}>
           <span>Nombre</span>
           <input
+            type='text'
             style={{ border: '1px solid black', height: 40 }}
             onChange={(e) => setName(e.target.value)}
           />
           <span>Telefono</span>
           <input
+            type='tel'
             style={{ border: '1px solid black', height: 40 }}
             onChange={(e) => setPhone(e.target.value)}
           />
           <span>Email</span>
           <input
+            type='email'
             required
             style={{ border: '1px solid black', marginBottom: 15, height: 40 }}
             onChange={(e) => setEmail(e.target.value)}
           />
-        </div>
+          <span>{sameEmails() ? '' : 'Los emails no coinciden'}</span>
+          <span>Confirmar Email</span>
+          <input
+            type='email'
+            required
+            style={{ border: '1px solid black', marginBottom: 15, height: 40 }}
+            onChange={(e) => {
+              setEmailConfirm(e.target.value);
+              sameEmails();
+            }}
+          />
+        </form>
         <div>
           <span>Total a pagar: {getTotal()}</span>
-          <Button variant='contained' onClick={() => createOrder()}>
+          <Button
+            disabled={!(name && phone && email && emailConfirm && sameEmails())}
+            variant='contained'
+            onClick={() => createOrder()}>
             Pagar
           </Button>
           <Button variant='contained' onClick={() => clear()}>
@@ -108,7 +136,7 @@ export const Cart = () => {
   return (
     <Layout>
       <div>
-        <Link> Volver al home</Link>
+        <Link to='/'> Volver al home</Link>
       </div>
 
       <p>No hay items</p>

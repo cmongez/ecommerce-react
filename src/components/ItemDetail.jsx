@@ -1,27 +1,34 @@
 import { useEffect } from 'react';
 import { ItemCount } from './ItemCount';
 
-export const ItemDetail = ({ product }) => {
-  const { id, title, pictureUrl, description, price } = product;
+export const ItemDetail = ({
+  id,
+  title,
+  pictureUrl,
+  description,
+  price,
+  stock,
+}) => {
+  const product = { id, title, pictureUrl, description, price, stock };
+  useEffect(() => {}, [id]);
 
-  useEffect(() => {
-    // console.log(id);
-  }, [id]);
+  if (id !== null) {
+    return (
+      <div className='products'>
+        <h1>{title}</h1>
 
-  return (
-    <div className='products'>
-      {/* {console.log('item', title, pictureUrl, description, price)} */}
-      <h1>{title}</h1>
-
-      <div>
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <img src={pictureUrl} height='400' alt='' />
+        <div>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <img src={pictureUrl} height='400' alt='' />
+          </div>
+          <p>{description}</p>
+          <p style={{ color: 'blue' }}>Quedan {stock} unidades disponibles</p>
+          <p style={{ color: 'green' }}>Precio: ${price}</p>
         </div>
-        <p>{description}</p>
-        <p style={{ color: 'green' }}>Precio: ${price}</p>
-      </div>
 
-      <ItemCount stock={6} product={product} />
-    </div>
-  );
+        <ItemCount product={product} />
+      </div>
+    );
+  }
+  return <div>cesar</div>;
 };

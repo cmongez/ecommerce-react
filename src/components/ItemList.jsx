@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getProducts } from '../api/products';
+import { getProducts, updateManyProducts } from '../api/products';
 import { Item } from './Item';
 import { Grid } from '@mui/material';
 import { useParams } from 'react-router-dom';

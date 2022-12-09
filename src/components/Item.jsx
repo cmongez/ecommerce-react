@@ -7,7 +7,7 @@ import { ItemCount } from './ItemCount';
 import { useNavigate } from 'react-router-dom';
 import './ItemList.css';
 export const Item = ({ product }) => {
-  const { title, description, price, pictureUrl, id } = product;
+  const { title, description, price, pictureUrl, id, stock } = product;
   const navigate = useNavigate();
 
   return (
@@ -24,11 +24,7 @@ export const Item = ({ product }) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <ItemCount
-          stock={6}
-          product={product}
-          onAdd={() => console.log('onAdd')}
-        />
+        <ItemCount product={product} onAdd={() => console.log('onAdd')} />
       </CardActions>
     </Card>
   );
