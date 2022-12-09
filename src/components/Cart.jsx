@@ -9,12 +9,13 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useCartContext } from '../context/CartContext';
 import { Layout } from '../components/Layout';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { addOrder } from '../api/orders';
 import { updateManyProducts } from '../api/products';
 
 export const Cart = () => {
+  const navigate = useNavigate();
   const { getTotal, cart, removeProduct, clear } = useCartContext();
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
@@ -42,7 +43,10 @@ export const Cart = () => {
       total: getTotal(),
     };
     await updateManyProducts(items);
-    addOrder(order).then(clear());
+    addOrder(order).then((id) => {
+      clear();
+      navigate(`/checkout/${id}`);
+    });
   };
 
   if (cart.length > 0) {
