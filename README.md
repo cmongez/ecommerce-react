@@ -20,18 +20,14 @@ Se renderiza trayendo los datos de Firebase y al comprar se emite una orden que 
   git clone https://github.com/cmongez/ecommerce-react.git
   ```
 
-- cd dentro del directorio de la carpeta:
-  ```bash
-  cd Proyecto_Ecommerce_React
-  ```
-
 - Instala las dependencias.
   ```bash
   npm install
   ```
+- Solicitar las variables de entorno y modificar el archivo .env.example por un .env
 
 - Para correr el proyecto:
 
   ```bash
-  npm run dev
+  npm start
   ```
