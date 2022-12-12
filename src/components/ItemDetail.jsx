@@ -10,7 +10,9 @@ export const ItemDetail = ({
   stock,
 }) => {
   const product = { id, title, pictureUrl, description, price, stock };
-  useEffect(() => {}, [id]);
+  useEffect(() => {
+    console.log(id, product);
+  }, [id]);
 
   if (id !== null) {
     return (

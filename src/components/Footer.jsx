@@ -1,7 +1,8 @@
+import './Footer.css';
 export const Footer = () => {
   return (
-    <div>
-      <p>Esto es un footer</p>
-    </div>
+    <footer className='footer'>
+      <p>César Mongez - 2022</p>
+    </footer>
   );
 };

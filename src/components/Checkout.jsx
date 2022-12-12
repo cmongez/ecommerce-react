@@ -15,7 +15,6 @@ export const Checkout = () => {
   const { id } = useParams();
   useEffect(() => {
     getOrder(id).then((id) => {
-      console.log(id);
       setOrder(id);
     });
   }, []);
@@ -31,7 +30,7 @@ export const Checkout = () => {
     <Layout>
       <h2>Orden {order.id}</h2>
       <div>
-        <h3>Datos de su compra</h3>
+        <h3>Datos de su compra ({order.date})</h3>
         <ul>
           <li>
             <b>Nombre:</b> {order.buyer.name}

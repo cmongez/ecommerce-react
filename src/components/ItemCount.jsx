@@ -20,6 +20,7 @@ export const ItemCount = ({ product }) => {
   };
   const handleAdd = () => {
     addProduct(product, count);
+    setCount(count - count);
   };
 
   return (

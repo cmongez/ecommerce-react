@@ -42,11 +42,15 @@ export const Cart = () => {
       date: date.toLocaleDateString(),
       total: getTotal(),
     };
+
+    console.log(order);
     await updateManyProducts(items);
-    addOrder(order).then((id) => {
-      clear();
-      navigate(`/checkout/${id}`);
-    });
+    addOrder(order)
+      .then((id) => {
+        clear();
+        navigate(`/checkout/${id}`);
+      })
+      .catch((error) => console.log('aqui', error));
   };
 
   if (cart.length > 0) {

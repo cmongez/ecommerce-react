@@ -11,7 +11,6 @@ export const ItemDetailContainer = ({ id }) => {
   useEffect(() => {
     getProduct(productId)
       .then((item) => {
-        console.log('x', item);
         setProduct(item);
       })
       .catch((e) => console.log(e));
@@ -21,7 +20,11 @@ export const ItemDetailContainer = ({ id }) => {
   return (
     <div>
       <Layout>
-        <ItemDetail {...product} />
+        {product === null ? (
+          <p>Producto no encontrado.</p>
+        ) : (
+          <ItemDetail {...product} />
+        )}
       </Layout>
     </div>
   );
