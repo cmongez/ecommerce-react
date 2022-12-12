@@ -17,7 +17,7 @@ Se renderiza trayendo los datos de Firebase y al comprar se emite una orden que 
 - Clonar el repositorio de GitHub:
 
   ```bash
-  git clone https://github.com/Nahuelz08/Proyecto_Ecommerce_React.git
+  git clone https://github.com/cmongez/ecommerce-react.git
   ```
 
 - cd dentro del directorio de la carpeta:
