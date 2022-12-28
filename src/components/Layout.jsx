@@ -1,10 +1,10 @@
-import { Navbar } from './Navbar';
+import { NavBar } from './NavBar';
 import { Footer } from './Footer';
 import { Container } from '@mui/material';
 export const Layout = ({ children }) => {
   return (
     <div>
-      <Navbar />
+      <NavBar />
       <Container style={{ minHeight: '100vh' }}>{children}</Container>
       <Footer />
     </div>
