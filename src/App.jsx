@@ -10,7 +10,7 @@ function App() {
   return (
     <div className='App'>
       <CartProvider>
-        <BrowserRouter>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/checkout/:id' element={<Checkout />} />
